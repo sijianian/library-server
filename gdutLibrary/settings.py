@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import libs.django_jwt_session_auth
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps',
+    'apps.search',
+    'apps.user'
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'libs.django_jwt_session_auth.JwtAuthMiddleware'
 ]
 
 ROOT_URLCONF = 'gdutLibrary.urls'
@@ -104,6 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+JWT_AUTH = {
+    'PAYLOAD_TO_USER': 'apps.user.auth.payload_to_user',
+    'USER_TO_PAYLOAD': 'apps.user.auth.user_to_payload',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

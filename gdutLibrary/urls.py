@@ -18,4 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^search/', include('apps.search.urls')),
+    url(r'^user/', include('apps.user.urls'))
 ]
