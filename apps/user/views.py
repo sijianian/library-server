@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 from libs.WXBizDataCrypt import WXBizDataCrypt
 from libs.django_jwt_session_auth import jwt_login
 from .models import Person
@@ -23,8 +24,9 @@ def login(request):
         crypt = WXBizDataCrypt(appid, session_key)
         user_info = crypt.decrypt(encrypted_data, iv)
         open_id = user_info['openId']
-        user = Person.objects.get(open_id=open_id)
-        if user is None:
+        try:
+            user = Person.objects.get(open_id=open_id)
+        except ObjectDoesNotExist:
             user = register(user_info)
         token = jwt_login(user, request)
         user_info['token'] = token.decode()
