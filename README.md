@@ -6,10 +6,6 @@
 
 - 使用技术：**python3.5、django、mysql、uwsgi...**
 
-- 前台：[m-mall](https://github.com/skyvow/m-mall)
-
-- 后台：[m-mall-admin](https://github.com/skyvow/m-mall-admin)
-
 ## 项目使用
 
 ```
